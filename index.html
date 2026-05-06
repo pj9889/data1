@@ -1,40 +1,183 @@
 <?php
 $file = 'stats.json';
-$data = file_exists($file) ? json_decode(file_get_contents($file), true) : ['visitor' => 0, 'nagad' => 0, 'payment' => 0];
+
+// Data load korar logic
+if (file_exists($file)) {
+    $content = file_get_contents($file);
+    $data = json_decode($content, true);
+} else {
+    $data = ['visitor' => 0, 'nagad' => 0, 'payment' => 0];
+}
+
+$visitor = isset($data['visitor']) ? $data['visitor'] : 0;
+$nagad = isset($data['nagad']) ? $data['nagad'] : 0;
+$payment = isset($data['payment']) ? $data['payment'] : 0;
 ?>
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" translate="no">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel - surovi69</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Admin Dashboard - surovi69</title>
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; text-align: center; padding: 50px; }
-        .stats-container { display: flex; justify-content: center; gap: 20px; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 200px; }
-        .card h2 { font-size: 40px; color: #0866ff; margin: 10px 0; }
-        .btn-refresh { margin-top: 30px; padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        :root {
+            --primary: #0866ff;
+            --nagad: #f7941d;
+            --success: #27ae60;
+            --bg: #f0f2f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #1c1e21;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #65676b;
+            margin-top: 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile-e ekta kore thakbe */
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Tablet ba Desktop-e side-by-side hobe */
+        @media (min-width: 600px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 800px;
+            }
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--primary);
+            transition: transform 0.2s;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin: 0;
+            color: #65676b;
+            font-weight: 600;
+        }
+
+        .card .count {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 10px 0;
+            color: var(--primary);
+        }
+
+        .card.nagad { border-bottom-color: var(--nagad); }
+        .card.nagad .count { color: var(--nagad); }
+
+        .card.payment { border-bottom-color: var(--success); }
+        .card.payment .count { color: var(--success); }
+
+        .refresh-area {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .btn-refresh {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(8, 102, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-refresh:active {
+            background-color: #0756d9;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #bcc0c4;
+        }
     </style>
 </head>
-<body>
+<body class="notranslate">
 
-    <h1>Surovi69 Website Stats</h1>
+    <div class="header">
+        <h1>Surovi69 Reports</h1>
+        <p>Live stats from payment landing page</p>
+    </div>
     
-    <div class="stats-container">
+    <div class="stats-grid">
         <div class="card">
             <h3>ভিজিটর</h3>
-            <h2><?php echo $data['visitor']; ?></h2>
+            <div class="count"><?php echo $visitor; ?></div>
         </div>
-        <div class="card">
+
+        <div class="card nagad">
             <h3>নগদ ক্লিক</h3>
-            <h2><?php echo $data['nagad']; ?></h2>
+            <div class="count"><?php echo $nagad; ?></div>
         </div>
-        <div class="card">
+
+        <div class="card payment">
             <h3>পেমেন্ট বাটন</h3>
-            <h2><?php echo $data['payment']; ?></h2>
+            <div class="count"><?php echo $payment; ?></div>
         </div>
     </div>
 
-    <button class="btn-refresh" onclick="location.reload()">Refresh Data</button>
+    <div class="refresh-area">
+        <button class="btn-refresh" onclick="location.reload()">
+            🔄 ডাটা রিফ্রেশ করুন
+        </button>
+    </div>
+
+    <div class="footer">
+        © 2026 surovi69 | IT Solutions
+    </div>
 
 </body>
 </html>
