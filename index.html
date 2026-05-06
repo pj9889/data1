@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surovi69 - Personal Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, system-ui, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 25px;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #050505;
+            font-size: 22px;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            color: #65676b;
+            font-size: 14px;
+        }
+
+        .counter-card {
+            background: #f7f8fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 5px solid #0866ff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .counter-card.nagad-card {
+            border-left-color: #f7941d;
+        }
+
+        .counter-card.pay-card {
+            border-left-color: #27ae60;
+        }
+
+        .card-details h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #444;
+        }
+
+        .card-details p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .counter-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #050505;
+        }
+
+        .refresh-btn {
+            width: 100%;
+            background: #0866ff;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(8, 102, 255, 0.2);
+        }
+
+        .refresh-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* হিডেন ফ্রেম ট্র্যাকিং এর জন্য */
+        #secret-frame {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <div class="header">
+            <h2><i class="fas fa-chart-line" style="color:#0866ff;"></i> পার্সোনাল ডাটা ড্যাশবোর্ড</h2>
+            <p>payment.surovi69.xyz এর লাইফটাইম হিসাব</p>
+        </div>
+
+        <div class="counter-card">
+            <div class="card-details">
+                <h3><i class="fas fa-users" style="color:#0866ff; width:20px;"></i> মোট ভিজিটর</h3>
+                <p>কতজন ওয়েবসাইটে প্রবেশ করেছে</p>
+            </div>
+            <div class="counter-number" id="v-count">0</div>
+        </div>
+
+        <div class="counter-card nagad-card">
+            <div class="card-details">
+                <h3><i class="fas fa-touch-app" style="color:#f7941d; width:20px;"></i> নগদ অপশন ক্লিক</h3>
+                <p>কতজন নগদ লোগোতে টাচ করেছে</p>
+            </div>
+            <div class="counter-number" id="n-count">0</div>
+        </div>
+
+        <div class="counter-card pay-card">
+            <div class="card-details">
+                <h3><i class="fas fa-check-circle" style="color:#27ae60; width:20px;"></i> পেমেন্ট বাটন ক্লিক</h3>
+                <p>কতজন নিশ্চিত করুন বাটনে চাপ দিয়েছে</p>
+            </div>
+            <div class="counter-number" id="p-count">0</div>
+        </div>
+
+        <button class="refresh-btn" onclick="requestData()"><i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন</button>
+    </div>
+
+    <iframe id="secret-frame" src="https://payment.surovi69.xyz/"></iframe>
+
+    <script>
+        const frame = document.getElementById('secret-frame');
+
+        function requestData() {
+            // পেমেন্ট পেজ থেকে ডাটা চাওয়া হচ্ছে
+            if(frame.contentWindow) {
+                frame.contentWindow.postMessage('get_analytics_data', 'https://payment.surovi69.xyz');
+            }
+        }
+
+        // মেইন পেমেন্ট পেজ ওপেন লোড হয়ে গেলে ডাটা অটোমেটিক লোড হবে
+        frame.onload = function() {
+            requestData();
+        };
+
+        // ডাটা রিসিভ করে স্ক্রিনে দেখানো
+        window.addEventListener('message', function(event) {
+            // নিরাপত্তা নিশ্চিত করতে আপনার পেমেন্ট ডোমেন চেক করা হচ্ছে
+            if (event.origin === 'https://payment.surovi69.xyz') {
+                document.getElementById('v-count').innerText = event.data.visitors;
+                document.getElementById('n-count').innerText = event.data.nagad;
+                document.getElementById('p-count').innerText = event.data.payments;
+            }
+        });
+    </script>
+</body>
+</html>
