@@ -1,183 +1,214 @@
-<?php
-$file = 'stats.json';
-
-// Data load korar logic
-if (file_exists($file)) {
-    $content = file_get_contents($file);
-    $data = json_decode($content, true);
-} else {
-    $data = ['visitor' => 0, 'nagad' => 0, 'payment' => 0];
-}
-
-$visitor = isset($data['visitor']) ? $data['visitor'] : 0;
-$nagad = isset($data['nagad']) ? $data['nagad'] : 0;
-$payment = isset($data['payment']) ? $data['payment'] : 0;
-?>
 <!DOCTYPE html>
 <html lang="bn" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google" content="notranslate">
-    <title>Admin Dashboard - surovi69</title>
+    <title>Surovi69 Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
             --primary: #0866ff;
             --nagad: #f7941d;
-            --success: #27ae60;
-            --bg: #f0f2f5;
+            --success: #00a400;
+            --text-main: #1c1e21;
+            --text-sub: #65676b;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             margin: 0;
             padding: 20px;
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #1c1e21;
         }
 
         .header {
             text-align: center;
             margin-bottom: 30px;
+            width: 100%;
+            max-width: 500px;
         }
 
         .header h1 {
             font-size: 24px;
             margin: 0;
-            color: #333;
+            font-weight: 800;
+            color: var(--primary);
         }
 
         .header p {
             font-size: 14px;
-            color: #65676b;
+            color: var(--text-sub);
             margin-top: 5px;
         }
 
-        .stats-grid {
+        .stats-container {
             display: grid;
-            grid-template-columns: 1fr; /* Mobile-e ekta kore thakbe */
+            grid-template-columns: 1fr;
             gap: 15px;
             width: 100%;
-            max-width: 400px;
-        }
-
-        /* Tablet ba Desktop-e side-by-side hobe */
-        @media (min-width: 600px) {
-            .stats-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 800px;
-            }
+            max-width: 500px;
         }
 
         .card {
-            background: white;
+            background: var(--card-bg);
             padding: 20px;
-            border-radius: 16px;
-            text-align: center;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--primary);
+            border: 1px solid rgba(0,0,0,0.02);
             transition: transform 0.2s;
         }
 
-        .card:active {
-            transform: scale(0.98);
+        .card:active { transform: scale(0.98); }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
 
-        .card h3 {
-            font-size: 16px;
-            margin: 0;
-            color: #65676b;
-            font-weight: 600;
-        }
+        .info { flex: 1; }
+        .info h3 { margin: 0; font-size: 15px; color: var(--text-sub); font-weight: 600; }
+        .info .count { font-size: 32px; font-weight: 800; margin: 5px 0 0 0; }
 
-        .card .count {
-            font-size: 40px;
-            font-weight: 800;
-            margin: 10px 0;
-            color: var(--primary);
-        }
+        /* Colors */
+        .v-card .icon-box { background: rgba(8, 102, 255, 0.1); color: var(--primary); }
+        .v-card .count { color: var(--primary); }
 
-        .card.nagad { border-bottom-color: var(--nagad); }
-        .card.nagad .count { color: var(--nagad); }
+        .n-card .icon-box { background: rgba(247, 148, 29, 0.1); color: var(--nagad); }
+        .n-card .count { color: var(--nagad); }
 
-        .card.payment { border-bottom-color: var(--success); }
-        .card.payment .count { color: var(--success); }
+        .p-card .icon-box { background: rgba(0, 164, 0, 0.1); color: var(--success); }
+        .p-card .count { color: var(--success); }
 
-        .refresh-area {
+        .refresh-btn {
             margin-top: 30px;
             width: 100%;
-            max-width: 400px;
-        }
-
-        .btn-refresh {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--primary);
+            max-width: 500px;
+            padding: 18px;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(8, 102, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            box-shadow: 0 10px 20px rgba(8, 102, 255, 0.2);
         }
 
-        .btn-refresh:active {
-            background-color: #0756d9;
-        }
+        .refresh-btn:active { background: #0756d9; }
 
-        .footer {
-            margin-top: 40px;
+        .loading-text {
             font-size: 12px;
-            color: #bcc0c4;
+            color: var(--text-sub);
+            margin-top: 10px;
+            display: none;
+        }
+
+        @media (min-width: 600px) {
+            .stats-container { grid-template-columns: repeat(3, 1fr); max-width: 900px; }
+            .card { flex-direction: column; text-align: center; padding: 30px; }
         }
     </style>
 </head>
 <body class="notranslate">
 
     <div class="header">
-        <h1>Surovi69 Reports</h1>
-        <p>Live stats from payment landing page</p>
+        <h1>Surovi69 Live Insight</h1>
+        <p>সরাসরি গুগল শিট থেকে আপডেট হচ্ছে</p>
     </div>
-    
-    <div class="stats-grid">
-        <div class="card">
-            <h3>ভিজিটর</h3>
-            <div class="count"><?php echo $visitor; ?></div>
+
+    <div class="stats-container">
+        <!-- Visitor -->
+        <div class="card v-card">
+            <div class="icon-box"><i class="fas fa-users"></i></div>
+            <div class="info">
+                <h3>মোট ভিজিটর</h3>
+                <div class="count" id="v_count">--</div>
+            </div>
         </div>
 
-        <div class="card nagad">
-            <h3>নগদ ক্লিক</h3>
-            <div class="count"><?php echo $nagad; ?></div>
+        <!-- Nagad -->
+        <div class="card n-card">
+            <div class="icon-box"><i class="fas fa-mobile-screen"></i></div>
+            <div class="info">
+                <h3>নগদ ক্লিক</h3>
+                <div class="count" id="n_count">--</div>
+            </div>
         </div>
 
-        <div class="card payment">
-            <h3>পেমেন্ট বাটন</h3>
-            <div class="count"><?php echo $payment; ?></div>
+        <!-- Payment -->
+        <div class="card p-card">
+            <div class="icon-box"><i class="fas fa-check-circle"></i></div>
+            <div class="info">
+                <h3>পেমেন্ট বাটন</h3>
+                <div class="count" id="p_count">--</div>
+            </div>
         </div>
     </div>
 
-    <div class="refresh-area">
-        <button class="btn-refresh" onclick="location.reload()">
-            🔄 ডাটা রিফ্রেশ করুন
-        </button>
-    </div>
+    <button class="refresh-btn" onclick="loadStats()">
+        <i class="fas fa-sync-alt" id="refresh-icon"></i> ডাটা রিফ্রেশ করুন
+    </button>
+    <div class="loading-text" id="loader">আপডেট হচ্ছে...</div>
 
-    <div class="footer">
-        © 2026 surovi69 | IT Solutions
-    </div>
+    <script>
+        // আপনার দেওয়া গুগল স্ক্রিপ্ট লিঙ্ক
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQadM-mg1kUPDXi-HygugyicETLV8n3ldFulJ4oslEfPlAie7rX2YbmypFwOIpiH1UHw/exec";
+
+        async function loadStats() {
+            const icon = document.getElementById('refresh-icon');
+            const loader = document.getElementById('loader');
+            
+            // Animation start
+            icon.style.transition = "transform 1s";
+            icon.style.transform = "rotate(360deg)";
+            loader.style.display = "block";
+
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                // শিট থেকে আসা ডাটা সেট করা
+                document.getElementById('v_count').innerText = data[0];
+                document.getElementById('n_count').innerText = data[1];
+                document.getElementById('p_count').innerText = data[2];
+                
+            } catch (error) {
+                console.error("Error loading data:", error);
+                alert("ডাটা লোড করতে সমস্যা হচ্ছে! আবার চেষ্টা করুন।");
+            } finally {
+                // Animation end
+                setTimeout(() => {
+                    icon.style.transform = "rotate(0deg)";
+                    icon.style.transition = "none";
+                    loader.style.display = "none";
+                }, 1000);
+            }
+        }
+
+        // পেজ ওপেন হলেই ডাটা লোড হবে
+        window.onload = loadStats;
+    </script>
 
 </body>
 </html>
