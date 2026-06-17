@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erotic Fantasy Club - Premium Booking</title>
+    <title>Welcome to Sukanta Service</title>
     <style>
-        /* Base Colors & Reset */
+        /* Modern CSS Reset & Fonts */
         * {
             margin: 0;
             padding: 0;
@@ -13,424 +13,227 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
-            background-color: #0f0c1b;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Container */
-        .container {
-            width: 100%;
-            max-width: 500px; /* Mobile First Optimization */
-            margin: 0 auto;
-            background: #161224;
-            min-height: 100vh;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            position: relative;
-            padding-bottom: 100px;
-        }
-
-        /* Header / Logo Area */
-        .header {
-            background: #ffffff;
-            padding: 20px 10px;
-            text-align: center;
-            border-bottom: 4px solid #ff2a74;
-        }
-
-        .header img {
-            max-width: 250px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            text-align: center;
-        }
-
-        .hero img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, #161224, rgba(22, 18, 36, 0.8), transparent);
-            padding: 30px 20px 20px 20px;
-        }
-
-        .badge {
-            background: #ff2a74;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        h1 {
-            font-size: 26px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            line-height: 1.2;
-            background: linear-gradient(45deg, #ff2a74, #ff758c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tagline {
-            font-size: 14px;
-            color: #b3b0c2;
-            margin-bottom: 15px;
-        }
-
-        /* Feature Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 15fr);
-            gap: 10px;
-            margin: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-num {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff2a74;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #8e8a9f;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        /* Floating CTA Button (High Converting) */
-        .cta-container {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
-            max-width: 460px;
-            z-index: 999;
-        }
-
-        .btn-main {
-            background: linear-gradient(90deg, #ff2a74, #ff5252);
-            color: white;
-            display: block;
-            text-align: center;
-            padding: 16px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(255, 42, 116, 0.4);
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .btn-main:active {
-            transform: scale(0.98);
-            box-shadow: 0 4px 15px rgba(255, 42, 116, 0.4);
-        }
-
-        /* Profile Gallery Grid */
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 25px 20px 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 18px;
-            background: #ff2a74;
-            border-radius: 2px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 0 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
+        body, html {
+            height: 100%;
             overflow: hidden;
-            background: #201b33;
-            aspect-ratio: 3/4;
+            background-color: #000;
         }
 
-        .gallery-item img {
+        /* Background Image Slider */
+        .bg-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
+            z-index: 1;
         }
 
-        .profile-info {
+        .slide {
             position: absolute;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Dark Overlay for better text readability */
+        .overlay {
+            position: absolute;
+            top: 0;
             left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 12px 10px 8px 10px;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 2;
         }
 
-        .profile-name {
-            font-size: 14px;
-            font-weight: bold;
+        /* Main Content Container */
+        .content-container {
+            position: relative;
+            z-index: 3;
+            height: 100%;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 5px;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
         }
 
-        .online-dot {
-            width: 8px;
-            height: 8px;
-            background: #4caf50;
-            border-radius: 50%;
+        /* Logo Styling */
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));
+        }
+
+        /* Card Content Box */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ff3e6c; /* Modern Pink/Red Accent */
+            font-weight: 700;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+        }
+
+        .warning-text {
+            font-size: 13px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* Buttons Styling */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-block;
         }
 
-        .profile-meta {
-            font-size: 11px;
-            color: #b3b0c2;
-            margin-top: 2px;
+        .btn-no {
+            background-color: #555;
+            color: #fff;
         }
 
-        /* Trust / Review Section */
-        .reviews-container {
-            padding: 0 20px;
+        .btn-no:hover {
+            background-color: #777;
         }
 
-        .review-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
+        .btn-yes {
+            background: linear-gradient(45deg, #ff3e6c, #ff6b6b);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 62, 108, 0.4);
         }
 
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
+        .btn-yes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 62, 108, 0.6);
         }
 
-        .reviewer-name {
-            font-size: 13px;
-            font-weight: bold;
-            color: #e1def0;
+        .btn-complete {
+            background: linear-gradient(45deg, #1dd1a1, #10ac84);
+            color: #fff;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(29, 209, 161, 0.4);
         }
 
-        .stars {
-            color: #ffb300;
-            font-size: 12px;
+        .btn-complete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(29, 209, 161, 0.6);
         }
 
-        .review-text {
-            font-size: 12.5px;
-            color: #9c99ae;
-            line-height: 1.4;
-        }
-
-        /* Safety & Features List */
-        .features-list {
-            padding: 0 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255,255,255,0.01);
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 13px;
-            color: #d1cee2;
-        }
-
-        .feature-icon {
-            color: #ff2a74;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* Footer Info */
-        .footer-info {
-            text-align: center;
-            padding: 40px 20px 20px 20px;
-            font-size: 11px;
-            color: #625f73;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: 30px;
+        /* Utilities */
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-
-        <header class="header">
-            <img src="logo.webp" alt="Erotic Fantasy Club" width="250" height="60">
-        </header>
-
-        <section class="hero">
-            <img src="hero_banner.webp" alt="Premium Escorts" width="500" height="400">
-            
-            <div class="hero-overlay">
-                <span class="badge">● Verified & Active Now</span>
-                <h1>Find Your Perfect Premium Companion</h1>
-                <p class="tagline">Discreet, Elite, and Unforgettable Experiences Tailored Just For You.</p>
-            </div>
-        </section>
-
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-num">150+</span>
-                <span class="stat-label">Active Models</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">100%</span>
-                <span class="stat-label">Discreet</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">4.9/5</span>
-                <span class="stat-label">User Rating</span>
-            </div>
-        </div>
-
-        <h2 class="section-title">Why Choose Our Club?</h2>
-        <div class="features-list">
-            <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Real photos verified by our internal safety team.</span>
-            </div>
-            <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Complete data privacy and secure instant booking.</span>
-            </div>
-            <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>No hidden charges. Pay directly and securely.</span>
-            </div>
-        </div>
-
-        <h2 class="section-title">Available Near You</h2>
-        <div class="gallery-grid">
-            
-            <div class="gallery-item">
-                <img src="girl1.webp" alt="Jacklyn" loading="lazy" width="230" height="300">
-                <div class="profile-info">
-                    <div class="profile-name"><span class="online-dot"></span> Jacklyn, 22</div>
-                    <div class="profile-meta">Elite Companion • Active Now</div>
-                </div>
-            </div>
-
-            <div class="gallery-item">
-                <img src="girl2.webp" alt="Jessica" loading="lazy" width="230" height="300">
-                <div class="profile-info">
-                    <div class="profile-name"><span class="online-dot"></span> Jessica, 24</div>
-                    <div class="profile-meta">VIP Model • 1.5 miles away</div>
-                </div>
-            </div>
-
-            <div class="gallery-item">
-                <img src="girl3.webp" alt="Amelia" loading="lazy" width="230" height="300">
-                <div class="profile-info">
-                    <div class="profile-name"><span class="online-dot"></span> Amelia, 21</div>
-                    <div class="profile-meta">Sensual Dancer • Near You</div>
-                </div>
-            </div>
-
-            <div class="gallery-item">
-                <img src="girl4.webp" alt="Scarlett" loading="lazy" width="230" height="300">
-                <div class="profile-info">
-                    <div class="profile-name"><span class="online-dot"></span> Scarlett, 25</div>
-                    <div class="profile-meta">Premium Escort • Verified</div>
-                </div>
-            </div>
-
-        </div>
-
-        <h2 class="section-title">Recent Reviews</h2>
-        <div class="reviews-container">
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="reviewer-name">David K.</span>
-                    <span class="stars">★★★★★</span>
-                </div>
-                <p class="review-text">"Amazing experience! Jacklyn was absolutely stunning and exactly like her photos. The booking process was smooth and entirely private."</p>
-            </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="reviewer-name">Anonymous Gold Member</span>
-                    <span class="stars">★★★★★</span>
-                </div>
-                <p class="review-text">"The best premium club service I've used so far. Highly professional and genuinely beautiful companions. 10/10 recommended."</p>
-            </div>
-        </div>
-
-        <footer class="footer-info">
-            <p>© 2026 Erotic Fantasy Club. All rights reserved.</p>
-            <p style="margin-top: 5px;">You must be 18+ years older to access our premium booking services. Privacy guaranteed.</p>
-        </footer>
-
-        <div class="cta-container">
-            <a href="https://www.jacklyn.site" target="_blank" class="btn-main">
-                💘 Book Her Now
-            </a>
-        </div>
-
+    <!-- Background Image Slider (.webp format updated) -->
+    <div class="bg-slider">
+        <div class="slide active" style="background-image: url('i1.webp');"></div>
+        <div class="slide" style="background-image: url('i2.webp');"></div>
+        <div class="slide" style="background-image: url('i3.webp');"></div>
+        <div class="slide" style="background-image: url('i4.webp');"></div>
+        <div class="slide" style="background-image: url('i5.webp');"></div>
     </div>
 
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <!-- Logo (.webp format updated) -->
+        <img src="lu11.webp" alt="Logo" class="logo">
+
+        <!-- Step 1: Age Verification Screen -->
+        <div id="step-1" class="card">
+            <h1>Welcome to Sukanta Free Escort Service</h1>
+            <p class="description">All of our female users are 100% real and verified profiles.</p>
+            <p class="warning-text">⚠️ Strictly Confidential: Please do not share our verified users' information outside.</p>
+            
+            <p class="question">Are you 18 years of age or older?</p>
+            
+            <div class="btn-group">
+                <button class="btn btn-no" onclick="showNextStep()">No</button>
+                <button class="btn btn-yes" onclick="showNextStep()">Yes</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Final Action Screen -->
+        <div id="step-2" class="card hidden">
+            <h1>Exclusive Invitation</h1>
+            <p class="description">To discuss free service options directly with our verified users, please join our official service platform for free.</p>
+            
+            <!-- আপনার ফাইনাল ওয়েবসাইটের লিংক এখানে বসাবেন -->
+            <a href="YOUR_WEBSITE_LINK_HERE" class="btn btn-complete">Complete Profile</a>
+        </div>
+    </div>
+
+    <script>
+        /* 1. Background Image Slider Logic (Changes every 1 second) */
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 1000); // 1 second
+
+        /* 2. Step Transition Logic */
+        function showNextStep() {
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
