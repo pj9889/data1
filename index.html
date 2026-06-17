@@ -35,7 +35,6 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            /* ১ সেকেন্ডে ছবি পরিবর্তনের স্মুথ ট্রানজিশন */
             transition: opacity 0.4s ease-in-out;
         }
 
@@ -43,14 +42,14 @@
             opacity: 1;
         }
 
-        /* লেখার নিচ দিয়ে যাতে ছবি সুন্দরভাবে দেখা যায় তার জন্য ওয়ান-লেয়ার ওভারলে */
+        /* মেইন ব্যাকগ্রাউন্ড ওভারলে সামান্য হালকা করা হয়েছে যাতে ছবি ৮০% স্পষ্ট আসে */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(13, 27, 42, 0.4) 0%, rgba(13, 27, 42, 0.75) 100%);
+            background: radial-gradient(circle, rgba(13, 27, 42, 0.2) 0%, rgba(13, 27, 42, 0.6) 100%);
             z-index: 2;
         }
 
@@ -80,16 +79,17 @@
             filter: drop-shadow(0px 4px 12px rgba(255, 114, 0, 0.3));
         }
 
+        /* লেখার বক্স (Card) - এটিকে ২০% কালার এবং ৮০% ট্রান্সপারেন্ট করা হয়েছে */
         .card {
-            background: rgba(13, 27, 42, 0.8);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(13, 27, 42, 0.25); /* ব্যাকগ্রাউন্ড মাত্র ২৫% ডার্ক, বাকিটা ট্রান্সপারেন্ট */
+            backdrop-filter: blur(2px);          /* ব্লার একদম কমিয়ে দেওয়া হয়েছে যাতে পেছনের ছবি স্পষ্ট দেখা যায় */
+            -webkit-backdrop-filter: blur(2px);
             padding: 35px 30px;
             border-radius: 20px;
             max-width: 480px;
             width: 100%;
-            border: 1px solid rgba(255, 114, 0, 0.25);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 114, 0, 0.4); /* বর্ডার লাইনের ব্রাইটনেস বাড়ানো হয়েছে যাতে বক্সের বর্ডার বোঝা যায় */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
         }
 
         h1 {
@@ -98,39 +98,43 @@
             color: #ff7200;
             font-weight: 700;
             letter-spacing: 0.5px;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8); /* লেখার রিডাবিলিটি ঠিক রাখার জন্য শ্যাডো দেওয়া হয়েছে */
         }
 
         .description {
             font-size: 15px;
             line-height: 1.6;
             margin-bottom: 20px;
-            color: #e2e8f0;
+            color: #ffffff;
+            font-weight: 500;
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.9);
         }
 
         .warning-text {
             font-size: 13px;
             color: #ffcc00;
-            background: rgba(255, 204, 0, 0.1);
-            border: 1px dashed rgba(255, 204, 0, 0.3);
+            background: rgba(0, 0, 0, 0.6); /* ওয়ার্নিং টেক্সটের ব্যাকগ্রাউন্ড ডার্ক করা হয়েছে যেন লেখা পড়া যায় */
+            border: 1px dashed rgba(255, 204, 0, 0.5);
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 20px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .question {
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 20px;
             color: #fff;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
             padding-top: 15px;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
         }
 
         .timer-container {
             margin-bottom: 20px;
-            background: rgba(255, 114, 0, 0.1);
-            border: 1px solid rgba(255, 114, 0, 0.2);
+            background: rgba(0, 0, 0, 0.6); /* টাইমারের ব্যাকগ্রাউন্ড ডার্ক করা হয়েছে স্পষ্ট দেখার জন্য */
+            border: 1px solid rgba(255, 114, 0, 0.4);
             border-radius: 10px;
             padding: 12px;
         }
@@ -171,12 +175,13 @@
         }
 
         .btn-no {
-            background-color: #334155;
-            color: #94a3b8;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .btn-no:hover {
-            background-color: #475569;
+            background-color: #334155;
             color: #fff;
         }
 
@@ -205,7 +210,7 @@
             box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
-        /* ২ সেকেন্ডের ফেক বাফারিং স্ক্রিন ডিজাইন */
+        /* বাফারিং স্ক্রিন */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -221,7 +226,6 @@
             color: white;
         }
 
-        /* গোল বাফারিং স্পিনার অ্যানিমেশন */
         .spinner {
             width: 50px;
             height: 50px;
@@ -244,6 +248,7 @@
 </head>
 <body>
 
+    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার (১ সেকেন্ড স্পিড) -->
     <div class="bg-slider">
         <div class="slide active" style="background-image: url('i1.webp');"></div>
         <div class="slide" style="background-image: url('i2.webp');"></div>
@@ -259,6 +264,7 @@
             <img src="lu11.webp" alt="Locanto Premium Logo" class="logo">
         </div>
 
+        <!-- ধাপ ১ -->
         <div id="step-1" class="card">
             <h1>Locanto Verified Service</h1>
             <p class="description">Welcome to Locanto's premium private community. All listed profiles are 100% real, active, and verified.</p>
@@ -270,6 +276,7 @@
             </div>
         </div>
 
+        <!-- ধাপ ২ -->
         <div id="step-2" class="card hidden">
             <h1>Connect For Free</h1>
             <p class="description">To discuss free trial service options directly with our nearby verified users, activate your free account instantly on our partner site.</p>
@@ -281,6 +288,7 @@
         </div>
     </div>
 
+    <!-- বাফারিং স্ক্রিন -->
     <div id="loading-screen" class="hidden">
         <img src="lu11.webp" alt="Locanto Premium Logo" class="logo" style="width: 180px;">
         <div class="spinner"></div>
@@ -288,7 +296,7 @@
     </div>
 
     <script>
-        // ১ সেকেন্ড (1000ms) পর পর ছবি পরিবর্তনের স্ক্রিপ্ট
+        // স্লাইডার স্ক্রিপ্ট (১ সেকেন্ড স্পিড)
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
 
@@ -296,26 +304,22 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 1000); // ১ সেকেন্ড স্পিড করা হলো
+        }, 1000);
 
-        // পরবর্তী ধাপে যাওয়ার ফাংশন
         function showNextStep() {
             document.getElementById('step-1').classList.add('hidden');
             document.getElementById('step-2').classList.remove('hidden');
         }
 
-        // ২ সেকেন্ড ফেক বাফারিং এবং রিডাইরেক্ট ফাংশন
+        // ২ সেকেন্ড ফেক বাফারিং
         function startBuffering() {
-            // বাফারিং স্ক্রিন দেখানো
             document.getElementById('loading-screen').classList.remove('hidden');
-            
-            // ২ সেকেন্ড (2000ms) পর লিংকে রিডাইরেক্ট করা হবে
             setTimeout(() => {
                 window.location.href = "https://paysale.g2afse.com/click?pid=125904&offer_id=10417&sub1=Jacklyn";
             }, 2000);
         }
 
-        // কাউন্টডাউন টাইমার স্ক্রিপ্ট
+        // টাইমার স্ক্রিপ্ট
         const TIMER_KEY = 'locanto_countdown_time';
         const START_TIME_SECONDS = (1 * 3600) + (17 * 60);
 
