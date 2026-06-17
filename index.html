@@ -1,142 +1,436 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Tracking Dashboard</title>
+    <title>Erotic Fantasy Club - Premium Booking</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; padding: 30px 15px; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 35px; }
-        header h1 { font-size: 26px; color: #38bdf8; font-weight: 700; }
-        header p { color: #94a3b8; font-size: 14px; margin-top: 5px; }
-        .refresh-btn { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); transition: all 0.2s ease; }
-        .refresh-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4); }
-        
-        /* 4 Columns Responsive Cards Layout */
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 35px; }
-        .card { background-color: #1e293b; padding: 25px; border-radius: 14px; border: 1px solid #334155; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden; }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
-        
-        .card.visits::before { background-color: #38bdf8; }
-        .card.voice::before { background-color: #a855f7; }
-        .card.fb::before { background-color: #1877F2; }
-        .card.chrome::before { background-color: #22c55e; }
+        /* Base Colors & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        .card h3 { font-size: 12px; text-transform: uppercase; color: #94a3b8; margin-bottom: 12px; letter-spacing: 1px; font-weight: 600; }
-        .card .value { font-size: 38px; font-weight: 800; line-height: 1; }
-        
-        .card.visits .value { color: #38bdf8; }
-        .card.voice .value { color: #a855f7; }
-        .card.fb .value { color: #1877F2; }
-        .card.chrome .value { color: #22c55e; }
+        body {
+            background-color: #0f0c1b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-        .analytics-box { background-color: #1e293b; padding: 30px; border-radius: 14px; border: 1px solid #334155; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
-        .analytics-box h2 { font-size: 19px; margin-bottom: 25px; color: #f1f5f9; font-weight: 600; }
-        .progress-item { margin-bottom: 20px; }
-        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
-        .progress-bar-bg { background-color: #334155; height: 16px; border-radius: 8px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; border-radius: 8px; width: 0%; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .fb-fill { background: linear-gradient(90deg, #1877F2, #3b82f6); }
-        .chrome-fill { background: linear-gradient(90deg, #22c55e, #10b981); }
-        .status-message { text-align: center; color: #94a3b8; font-size: 13px; margin-top: 25px; font-style: italic; }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 500px; /* Mobile First Optimization */
+            margin: 0 auto;
+            background: #161224;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+            padding-bottom: 100px;
+        }
+
+        /* Header / Logo Area */
+        .header {
+            background: #ffffff;
+            padding: 20px 10px;
+            text-align: center;
+            border-bottom: 4px solid #ff2a74;
+        }
+
+        .header img {
+            max-width: 250px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, #161224, rgba(22, 18, 36, 0.8), transparent);
+            padding: 30px 20px 20px 20px;
+        }
+
+        .badge {
+            background: #ff2a74;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #ff2a74, #ff758c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #b3b0c2;
+            margin-bottom: 15px;
+        }
+
+        /* Feature Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 15fr);
+            gap: 10px;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff2a74;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #8e8a9f;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* Floating CTA Button (High Converting) */
+        .cta-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 460px;
+            z-index: 999;
+        }
+
+        .btn-main {
+            background: linear-gradient(90deg, #ff2a74, #ff5252);
+            color: white;
+            display: block;
+            text-align: center;
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(255, 42, 116, 0.4);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-main:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 15px rgba(255, 42, 116, 0.4);
+        }
+
+        /* Profile Gallery Grid */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 25px 20px 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: #ff2a74;
+            border-radius: 2px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #201b33;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 12px 10px 8px 10px;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .profile-meta {
+            font-size: 11px;
+            color: #b3b0c2;
+            margin-top: 2px;
+        }
+
+        /* Trust / Review Section */
+        .reviews-container {
+            padding: 0 20px;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .reviewer-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #e1def0;
+        }
+
+        .stars {
+            color: #ffb300;
+            font-size: 12px;
+        }
+
+        .review-text {
+            font-size: 12.5px;
+            color: #9c99ae;
+            line-height: 1.4;
+        }
+
+        /* Safety & Features List */
+        .features-list {
+            padding: 0 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.01);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #d1cee2;
+        }
+
+        .feature-icon {
+            color: #ff2a74;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Footer Info */
+        .footer-info {
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+            font-size: 11px;
+            color: #625f73;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div>
-            <h1>Landing Page Tracker Dashboard</h1>
-            <p>গুগল শিট থেকে রিয়েল-টাইম ট্রাফিক এবং ভয়েস প্লে অ্যানালিটিক্স রিপোর্ট</p>
-        </div>
-        <button class="refresh-btn" onclick="fetchData()">Refresh Data</button>
-    </header>
+    <div class="container">
 
-    <div class="grid-cards">
-        <div class="card visits">
-            <h3>Total Visits</h3>
-            <div class="value" id="totalVisits">0</div>
-        </div>
-        <div class="card voice">
-            <h3>Voice Played (ভয়েস শুনেছে)</h3>
-            <div class="value" id="voicePlays">0</div>
-        </div>
-        <div class="card fb">
-            <h3>Facebook Clicks</h3>
-            <div class="value" id="fbClicks">0</div>
-        </div>
-        <div class="card chrome">
-            <h3>Chrome Clicks</h3>
-            <div class="value" id="chromeClicks">0</div>
-        </div>
-    </div>
+        <header class="header">
+            <img src="logo.webp" alt="Erotic Fantasy Club" width="250" height="60">
+        </header>
 
-    <div class="analytics-box">
-        <h2>Click Comparison Ratio</h2>
-        <div class="progress-item">
-            <div class="progress-label">
-                <span>Facebook Browser Button Action</span>
-                <span id="fbPercent" style="color: #1877F2;">0%</span>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill fb-fill" id="fbBar"></div>
-            </div>
-        </div>
-        <div class="progress-item">
-            <div class="progress-label">
-                <span>Chrome Browser Button Action</span>
-                <span id="chromePercent" style="color: #22c55e;">0%</span>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill chrome-fill" id="chromeBar"></div>
-            </div>
-        </div>
-        <p class="status-message" id="statusText">ডাটা লোড হচ্ছে...</p>
-    </div>
-</div>
-
-<script>
-    // 🔴 Apnar Notun Web App URL 🔴
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbxt8zvE3O1Sy0h6sf1UAGVaP-2CJt8Lr53Xee0rW80VZz6Qfa5iHHA1i03c_PHP3mBB8A/exec";
-
-    async function fetchData() {
-        document.getElementById('statusText').innerText = "গুগল শিট থেকে সর্বশেষ ডাটা আনা হচ্ছে...";
-        try {
-            const response = await fetch(scriptUrl);
-            const data = await response.json();
+        <section class="hero">
+            <img src="hero_banner.webp" alt="Premium Escorts" width="500" height="400">
             
-            if(data) {
-                updateDashboard(data.visits, data.fbClicks, data.chromeClicks, data.voicePlays);
-                document.getElementById('statusText').innerText = "সর্বশেষ লাইভ আপডেট: এইমাত্র সফলভাবে সম্পন্ন হয়েছে।";
-            }
-        } catch (error) {
-            console.log("Fetch Error:", error);
-            document.getElementById('statusText').innerText = "ডাটা লোড করতে সমস্যা হয়েছে।";
-        }
-    }
+            <div class="hero-overlay">
+                <span class="badge">● Verified & Active Now</span>
+                <h1>Find Your Perfect Premium Companion</h1>
+                <p class="tagline">Discreet, Elite, and Unforgettable Experiences Tailored Just For You.</p>
+            </div>
+        </section>
 
-    function updateDashboard(visits, fb, chrome, voice) {
-        document.getElementById('totalVisits').innerText = visits;
-        document.getElementById('fbClicks').innerText = fb;
-        document.getElementById('chromeClicks').innerText = chrome;
-        document.getElementById('voicePlays').innerText = voice; 
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-num">150+</span>
+                <span class="stat-label">Active Models</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">100%</span>
+                <span class="stat-label">Discreet</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">4.9/5</span>
+                <span class="stat-label">User Rating</span>
+            </div>
+        </div>
 
-        const totalClicks = fb + chrome || 1;
-        const fbPercent = Math.round((fb / totalClicks) * 100);
-        const chromePercent = Math.round((chrome / totalClicks) * 100);
+        <h2 class="section-title">Why Choose Our Club?</h2>
+        <div class="features-list">
+            <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Real photos verified by our internal safety team.</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Complete data privacy and secure instant booking.</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>No hidden charges. Pay directly and securely.</span>
+            </div>
+        </div>
 
-        document.getElementById('fbPercent').innerText = fbPercent + "%";
-        document.getElementById('fbBar').style.width = fbPercent + "%";
+        <h2 class="section-title">Available Near You</h2>
+        <div class="gallery-grid">
+            
+            <div class="gallery-item">
+                <img src="girl1.webp" alt="Jacklyn" loading="lazy" width="230" height="300">
+                <div class="profile-info">
+                    <div class="profile-name"><span class="online-dot"></span> Jacklyn, 22</div>
+                    <div class="profile-meta">Elite Companion • Active Now</div>
+                </div>
+            </div>
 
-        document.getElementById('chromePercent').innerText = chromePercent + "%";
-        document.getElementById('chromeBar').style.width = chromePercent + "%";
-    }
+            <div class="gallery-item">
+                <img src="girl2.webp" alt="Jessica" loading="lazy" width="230" height="300">
+                <div class="profile-info">
+                    <div class="profile-name"><span class="online-dot"></span> Jessica, 24</div>
+                    <div class="profile-meta">VIP Model • 1.5 miles away</div>
+                </div>
+            </div>
 
-    window.onload = function() {
-        fetchData();
-    };
-</script>
+            <div class="gallery-item">
+                <img src="girl3.webp" alt="Amelia" loading="lazy" width="230" height="300">
+                <div class="profile-info">
+                    <div class="profile-name"><span class="online-dot"></span> Amelia, 21</div>
+                    <div class="profile-meta">Sensual Dancer • Near You</div>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="girl4.webp" alt="Scarlett" loading="lazy" width="230" height="300">
+                <div class="profile-info">
+                    <div class="profile-name"><span class="online-dot"></span> Scarlett, 25</div>
+                    <div class="profile-meta">Premium Escort • Verified</div>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">Recent Reviews</h2>
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">David K.</span>
+                    <span class="stars">★★★★★</span>
+                </div>
+                <p class="review-text">"Amazing experience! Jacklyn was absolutely stunning and exactly like her photos. The booking process was smooth and entirely private."</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">Anonymous Gold Member</span>
+                    <span class="stars">★★★★★</span>
+                </div>
+                <p class="review-text">"The best premium club service I've used so far. Highly professional and genuinely beautiful companions. 10/10 recommended."</p>
+            </div>
+        </div>
+
+        <footer class="footer-info">
+            <p>© 2026 Erotic Fantasy Club. All rights reserved.</p>
+            <p style="margin-top: 5px;">You must be 18+ years older to access our premium booking services. Privacy guaranteed.</p>
+        </footer>
+
+        <div class="cta-container">
+            <a href="https://www.jacklyn.site" target="_blank" class="btn-main">
+                💘 Book Her Now
+            </a>
+        </div>
+
+    </div>
+
 </body>
 </html>
