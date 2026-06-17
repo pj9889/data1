@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Sukanta Service</title>
+    <title>Locanto Premium Escorts - Verified Community</title>
     <style>
-        /* Modern CSS Reset & Fonts */
         * {
             margin: 0;
             padding: 0;
@@ -16,10 +15,9 @@
         body, html {
             height: 100%;
             overflow: hidden;
-            background-color: #000;
+            background-color: #0d1b2a;
         }
 
-        /* Background Image Slider */
         .bg-slider {
             position: absolute;
             top: 0;
@@ -36,25 +34,23 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.6s ease-in-out;
         }
 
         .slide.active {
             opacity: 1;
         }
 
-        /* Dark Overlay for better text readability */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.65);
+            background: radial-gradient(circle, rgba(13, 27, 42, 0.6) 0%, rgba(13, 27, 42, 0.85) 100%);
             z-index: 2;
         }
 
-        /* Main Content Container */
         .content-container {
             position: relative;
             z-index: 3;
@@ -68,47 +64,55 @@
             color: #fff;
         }
 
-        /* Logo Styling */
+        .logo-container {
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .logo {
-            width: 120px;
+            width: 150px;
             height: auto;
-            margin-bottom: 30px;
-            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 4px 12px rgba(255, 114, 0, 0.3));
         }
 
-        /* Card Content Box */
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 16px;
-            max-width: 500px;
+            background: rgba(13, 27, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 35px 30px;
+            border-radius: 20px;
+            max-width: 480px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 114, 0, 0.25);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* Typography */
         h1 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #ff3e6c; /* Modern Pink/Red Accent */
+            font-size: 26px;
+            margin-bottom: 12px;
+            color: #ff7200;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .description {
             font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 25px;
-            color: #e0e0e0;
+            margin-bottom: 20px;
+            color: #e2e8f0;
         }
 
         .warning-text {
             font-size: 13px;
             color: #ffcc00;
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px dashed rgba(255, 204, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-weight: 500;
         }
 
         .question {
@@ -116,9 +120,35 @@
             font-weight: 600;
             margin-bottom: 20px;
             color: #fff;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
         }
 
-        /* Buttons Styling */
+        .timer-container {
+            margin-bottom: 20px;
+            background: rgba(255, 114, 0, 0.1);
+            border: 1px solid rgba(255, 114, 0, 0.2);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .timer-text {
+            font-size: 14px;
+            color: #ffb07c;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .timer-clock {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff7200;
+            font-family: monospace;
+            text-shadow: 0 0 8px rgba(255, 114, 0, 0.4);
+        }
+
         .btn-group {
             display: flex;
             gap: 15px;
@@ -126,50 +156,51 @@
         }
 
         .btn {
-            padding: 12px 35px;
+            padding: 14px 40px;
             font-size: 16px;
             font-weight: 600;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             display: inline-block;
         }
 
         .btn-no {
-            background-color: #555;
-            color: #fff;
+            background-color: #334155;
+            color: #94a3b8;
         }
 
         .btn-no:hover {
-            background-color: #777;
+            background-color: #475569;
+            color: #fff;
         }
 
         .btn-yes {
-            background: linear-gradient(45deg, #ff3e6c, #ff6b6b);
+            background: linear-gradient(45deg, #ff7200, #ff2e00);
             color: #fff;
-            box-shadow: 0 4px 15px rgba(255, 62, 108, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 114, 0, 0.45);
         }
 
         .btn-yes:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 62, 108, 0.6);
+            box-shadow: 0 6px 20px rgba(255, 114, 0, 0.65);
         }
 
         .btn-complete {
-            background: linear-gradient(45deg, #1dd1a1, #10ac84);
+            background: linear-gradient(45deg, #10b981, #059669);
             color: #fff;
             width: 100%;
-            box-shadow: 0 4px 15px rgba(29, 209, 161, 0.4);
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
         }
 
         .btn-complete:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(29, 209, 161, 0.6);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
-        /* Utilities */
         .hidden {
             display: none;
         }
@@ -177,7 +208,6 @@
 </head>
 <body>
 
-    <!-- Background Image Slider (.webp format updated) -->
     <div class="bg-slider">
         <div class="slide active" style="background-image: url('i1.webp');"></div>
         <div class="slide" style="background-image: url('i2.webp');"></div>
@@ -186,40 +216,36 @@
         <div class="slide" style="background-image: url('i5.webp');"></div>
     </div>
 
-    <!-- Dark Overlay -->
     <div class="overlay"></div>
 
-    <!-- Main Content -->
     <div class="content-container">
-        <!-- Logo (.webp format updated) -->
-        <img src="lu11.webp" alt="Logo" class="logo">
+        <div class="logo-container">
+            <img src="lu11.webp" alt="Locanto Premium Logo" class="logo">
+        </div>
 
-        <!-- Step 1: Age Verification Screen -->
         <div id="step-1" class="card">
-            <h1>Welcome to Sukanta Free Escort Service</h1>
-            <p class="description">All of our female users are 100% real and verified profiles.</p>
-            <p class="warning-text">⚠️ Strictly Confidential: Please do not share our verified users' information outside.</p>
-            
+            <h1>Locanto Verified Service</h1>
+            <p class="description">Welcome to Locanto's premium private community. All listed profiles are 100% real, active, and verified.</p>
+            <p class="warning-text">⚠️ Confidentiality Notice: Please keep all verified user identities and personal contact details completely private.</p>
             <p class="question">Are you 18 years of age or older?</p>
-            
             <div class="btn-group">
                 <button class="btn btn-no" onclick="showNextStep()">No</button>
                 <button class="btn btn-yes" onclick="showNextStep()">Yes</button>
             </div>
         </div>
 
-        <!-- Step 2: Final Action Screen -->
         <div id="step-2" class="card hidden">
-            <h1>Exclusive Invitation</h1>
-            <p class="description">To discuss free service options directly with our verified users, please join our official service platform for free.</p>
-            
-            <!-- আপনার ফাইনাল ওয়েবসাইটের লিংক এখানে বসাবেন -->
+            <h1>Connect For Free</h1>
+            <p class="description">To discuss free trial service options directly with our nearby verified users, activate your free account instantly on our partner site.</p>
+            <div class="timer-container">
+                <div class="timer-text">Free Spots Expiring In</div>
+                <div id="timer" class="timer-clock">01h 17m 00s</div>
+            </div>
             <a href="YOUR_WEBSITE_LINK_HERE" class="btn btn-complete">Complete Profile</a>
         </div>
     </div>
 
     <script>
-        /* 1. Background Image Slider Logic (Changes every 1 second) */
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
 
@@ -227,13 +253,49 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 1000); // 1 second
+        }, 1000);
 
-        /* 2. Step Transition Logic */
         function showNextStep() {
             document.getElementById('step-1').classList.add('hidden');
             document.getElementById('step-2').classList.remove('hidden');
         }
+
+        const TIMER_KEY = 'locanto_countdown_time';
+        const START_TIME_SECONDS = (1 * 3600) + (17 * 60);
+
+        let timeLeft;
+        const savedTime = localStorage.getItem(TIMER_KEY);
+        
+        if (savedTime) {
+            timeLeft = parseInt(savedTime, 10);
+        } else {
+            timeLeft = START_TIME_SECONDS;
+            localStorage.setItem(TIMER_KEY, timeLeft);
+        }
+
+        const timerElement = document.getElementById('timer');
+
+        function updateTimerDisplay() {
+            if (timeLeft <= 0) {
+                timeLeft = START_TIME_SECONDS;
+            }
+
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+
+            const formattedHours = hours.toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            const formattedSeconds = seconds.toString().padStart(2, '0');
+
+            timerElement.textContent = `${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+            
+            timeLeft--;
+            localStorage.setItem(TIMER_KEY, timeLeft);
+        }
+
+        updateTimerDisplay();
+        setInterval(updateTimerDisplay, 1000);
     </script>
 </body>
 </html>
